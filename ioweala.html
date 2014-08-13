@@ -1,0 +1,55 @@
+<head>
+  <title>ioweala</title>
+</head>
+
+<body>
+  {{> hello}}
+  <div>
+  {{> selectEntranceYear}}
+  </div>
+  <div>
+  {{> inputOriginalAward}}
+  </div>
+  <div>
+  {{> selectDateOfTwentyFifthBirthday}}
+  </div>
+  <div>
+  {{> tellMe}}
+  </div>
+  <div>
+  {{> result}}
+  </div>
+</body>
+
+<template name="hello">
+  <h1>Karibu</h1>
+  {{greeting}}
+</template>
+
+<template name="selectEntranceYear">
+<label for="selectEntranceYear">When did you enter ALA?</label>
+<select name="year" id="yearpicker">
+	<option value="2008">2008</option>
+	<option value="2009">2009</option>
+	<option value="2010">2010</option>
+</select>
+</template>
+
+<template name="inputOriginalAward">
+	<label for="inputOriginalAward">Original Amount in USD</label>
+	<input name="principal" type="text" id="principal">
+	<span><strong>k</strong></span>
+</template>
+
+<template name="selectDateOfTwentyFifthBirthday">
+	<label for="selectDateOfTwentyFifthBirthday">When will you turn 25?</label>
+	<input type="date" id="dreadedDate">
+</template>
+
+<template name="tellMe">
+  <input type="button" value="Tell Me!" />
+</template>
+
+<template name="result">
+  <p>{{amount}}</p>
+</template>
