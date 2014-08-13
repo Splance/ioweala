@@ -1,9 +1,13 @@
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ioweala</title>
 </head>
 
 <body>
-  {{> hello}}
+<div class="container-fluid">
+  <h3 class="text-center">{{> hello}}</h3>
+  <div class ="row">
+  <form role="form" class="col-xs-6 col-xs-offset-3 col-md-4 col-md-offset-4">
   <div>
   {{> selectEntranceYear}}
   </div>
@@ -16,19 +20,22 @@
   <div>
   {{> tellMe}}
   </div>
+  </form>
+  </div>
   <div>
   {{> result}}
   </div>
+ </div>
 </body>
 
-<template name="hello">
-  <h1>Karibu</h1>
-  {{greeting}}
+<template name="hello" class="text-center">
+  <h1 class="text-center">Karibu</h1>
+  <h4>Remember, this is just an estimation. <br/>Very Rudimentary. Don't take it too seriously!</h4>
 </template>
 
 <template name="selectEntranceYear">
 <label for="selectEntranceYear">When did you enter ALA?</label>
-<select name="year" id="yearpicker">
+<select name="year" id="yearpicker" class="form-control">
 	<option value="2008">2008</option>
 	<option value="2009">2009</option>
 	<option value="2010">2010</option>
@@ -36,20 +43,20 @@
 </template>
 
 <template name="inputOriginalAward">
-	<label for="inputOriginalAward">Original Amount in USD</label>
-	<input name="principal" type="text" id="principal">
-	<span><strong>k</strong></span>
+	<label for="principal">Original Amount in USD k</label>
+	<input name="principal" type="number" id="principal" value={{defaultAmount}} min="0" step="0.5" max="50" class="form-control"/>
 </template>
 
 <template name="selectDateOfTwentyFifthBirthday">
 	<label for="selectDateOfTwentyFifthBirthday">When will you turn 25?</label>
-	<input type="date" id="dreadedDate">
+	<input type="date" id="dreadedDate" class="form-control" value={{defaultDate}}>
+	<br/>
 </template>
 
 <template name="tellMe">
-  <input type="button" value="Tell Me!" />
+  <input type="button" class="btn btn-primary form-control" value="Tell Me!"/>
 </template>
 
 <template name="result">
-  <p>{{amount}}</p>
+  <h2 class="text-center">{{amount}}</h2>
 </template>

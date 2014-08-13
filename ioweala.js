@@ -1,9 +1,21 @@
 if (Meteor.isClient) {
 
   Session.set('result', ".......");
+  defaultDate = "2015-08-15";
+  Session.set('ddate', defaultDate);
+  defaultAmount = 40;
+  Session.set('principal', defaultAmount);
 
   Template.hello.greeting = function () {
-    return "Remember, this is just an estimation. Very Rudimentary. Don't take it too seriously!";
+    return "";
+  };
+
+  Template.selectDateOfTwentyFifthBirthday.defaultDate = function() {
+    return defaultDate;
+  };
+
+  Template.inputOriginalAward.defaultAmount = function() {
+    return defaultAmount;
   };
 
   Template.result.amount = function() {

@@ -3,7 +3,8 @@
   "dependencies": {
     "basePackages": {
       "less-bootstrap-3": {},
-      "font-awesome-4-less": {}
+      "font-awesome-4-less": {},
+      "jquery-ui-bootstrap": {}
     },
     "packages": {
       "less-bootstrap-3": {
@@ -15,6 +16,16 @@
         "git": "https://github.com/svub/fontawesome4-less.git",
         "tag": "v4.4.0",
         "commit": "250d2336a217c18eb70e9d074784a7db3ca38472"
+      },
+      "jquery-ui-bootstrap": {
+        "git": "https://github.com/TimHeckel/meteor-jquery-ui-bootstrap.git",
+        "tag": "v0.1.2",
+        "commit": "fa742a85639307003e105898e15b631394b63509"
+      },
+      "jquery-ui": {
+        "git": "https://github.com/TimHeckel/meteor-jquery-ui.git",
+        "tag": "v1.9.2",
+        "commit": "c437d45edcf1367df8d5ffa8bad2867758030bd2"
       }
     }
   }
