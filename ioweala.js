@@ -64,6 +64,17 @@ if (Meteor.isClient) {
       // template data, if any, is available in 'this'
       // if (typeof console !== 'undefined')
         // console.log(evt.currentTarget.value);
+      year = Session.get('entranceYear');
+      if ( year == "2008") {
+        rate = 0.155;
+        d1 = '01/08/2008';
+      } else if (year == "2009") {
+        rate = 0.17;
+        d1 = '01/08/2009';
+      } else {
+        rate = 0.16;
+        d1 = '01/08/2010';
+      }
 
       var d = Session.get('ddate');
       var arrDate = d.split('-');
@@ -71,21 +82,13 @@ if (Meteor.isClient) {
       var dDate = new Date(arrDate[0], arrDate[1] -1, arrDate[2]);
       // console.log(dDate);
 
-      var d1 = '01/08/2008';
+      
       var arrDate1 = d1.split("/");
-      // console.log(arrDate1);
       entranceDate = new Date(arrDate1[2], arrDate1[1] -1, arrDate1[0]);
-      // console.log(entranceDate);
 
       dateDiff = diffDate(dDate,entranceDate);
       // console.log(dateDiff);
-      year = Session.get('entranceYear');
-      if ( year == "2008")
-        rate = 0.155;
-      else if (year == "2009")
-        rate = 0.17;
-      else
-        rate = 0.16;
+      
       res = Math.floor(Session.get('principal') * Math.pow(1+rate, dateDiff));
       // console.log(res);
       Session.set('result', res);
