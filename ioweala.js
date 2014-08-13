@@ -5,6 +5,8 @@ if (Meteor.isClient) {
   Session.set('ddate', defaultDate);
   defaultAmount = 40;
   Session.set('principal', defaultAmount);
+  defaultYear = "2008";
+  Session.set('entranceYear', defaultYear);
 
   Template.hello.greeting = function () {
     return "";
@@ -77,8 +79,11 @@ if (Meteor.isClient) {
 
       dateDiff = diffDate(dDate,entranceDate);
       // console.log(dateDiff);
-      if (Session.get('entranceYear') == "2008")
+      year = Session.get('entranceYear');
+      if ( year == "2008")
         rate = 0.155;
+      else if (year == "2009")
+        rate = 0.17;
       else
         rate = 0.16;
       res = Math.floor(Session.get('principal') * Math.pow(1+rate, dateDiff));
