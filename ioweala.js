@@ -4,7 +4,7 @@ Entrances = new Meteor.Collection("entrances");
 if (Meteor.isClient) {
 
   Session.set('result', ".......");
-  defaultDate = "2015-08-15";
+  defaultDate = "2014-07-17";
   Session.set('ddate', defaultDate);
   defaultAmount = 40;
   Session.set('principal', defaultAmount);
@@ -102,7 +102,7 @@ if (Meteor.isClient) {
     var day = 1000* 60 * 60 * 24;
 
     var days = diff/day;
-    var months = days/30;
+    var months = days/30.33;
     var years = months/12;
 
     return years;
