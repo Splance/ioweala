@@ -1,3 +1,6 @@
+
+Entrances = new Meteor.Collection("entrances");
+
 if (Meteor.isClient) {
 
   Session.set('result', ".......");
@@ -14,6 +17,10 @@ if (Meteor.isClient) {
 
   Template.selectDateOfTwentyFifthBirthday.defaultDate = function() {
     return defaultDate;
+  };
+
+  Template.selectDateOfTwentyFifthBirthday.years = function () {
+    return EntranceYears.find({}, {sort: {year: 1}}); //not working for some reason
   };
 
   Template.inputOriginalAward.defaultAmount = function() {
@@ -64,32 +71,26 @@ if (Meteor.isClient) {
       // template data, if any, is available in 'this'
       // if (typeof console !== 'undefined')
         // console.log(evt.currentTarget.value);
-      year = Session.get('entranceYear');
-      if ( year == "2008") {
-        rate = 0.155;
-        d1 = '01/08/2008';
-      } else if (year == "2009") {
-        rate = 0.17;
-        d1 = '01/08/2009';
-      } else {
-        rate = 0.16;
-        d1 = '01/08/2010';
-      }
+      var yearSelected = Session.get('entranceYear');
+      var principalSelected = Session.get('principal');
+      var dDateSelected = Session.get('ddate');
 
-      var d = Session.get('ddate');
-      var arrDate = d.split('-');
+      entranceDetails = Entrances.findOne({year:Session.get('entranceYear')});
+      d1 = entranceDetails.fdoc;
+      rate = entranceDetails.rate;
+
+      var arrDate = dDateSelected.split('-');
       // console.log(arrDate);
       var dDate = new Date(arrDate[0], arrDate[1] -1, arrDate[2]);
       // console.log(dDate);
 
-      
       var arrDate1 = d1.split("/");
       entranceDate = new Date(arrDate1[2], arrDate1[1] -1, arrDate1[0]);
 
       dateDiff = diffDate(dDate,entranceDate);
       // console.log(dateDiff);
-      
-      res = Math.floor(Session.get('principal') * Math.pow(1+rate, dateDiff));
+
+      res = Math.floor(principalSelected * Math.pow(1+rate, dateDiff));
       // console.log(res);
       Session.set('result', res);
     }
@@ -111,5 +112,13 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
   Meteor.startup(function () {
     // code to run on server at startup
+    if (Entrances.find().count() === 0) {
+      var classes = [{year:"2008", fdoc:"01/08/2008", rate:0.155},
+                   {year:"2009", fdoc:"01/08/2009", rate:0.17},
+                   {year:"2010", fdoc:"01/08/2010", rate:0.16}
+                   ];
+      for (var i = 0; i < classes.length; i++)
+        Entrances.insert(classes[i]);
+    }
   });
 }
