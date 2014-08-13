@@ -41,16 +41,16 @@
 </body>
 
 <template name="hello" class="text-center">
-  <h1 class="text-center">Karibu</h1>
+  <h1 class="text-center">{{greeting}}</h1>
   <h4>Remember, this is just an estimation. <br/>Very Rudimentary. Don't take it too seriously!</h4>
 </template>
 
 <template name="selectEntranceYear">
 <label for="selectEntranceYear">When did you enter ALA?</label>
 <select name="year" id="yearpicker" class="form-control">
-	<option value="2008">2008</option>
-	<option value="2009">2009</option>
-	<option value="2010">2010</option>
+  {{#each entrances}}
+      {{> entranceOption}}
+    {{/each}}
 </select>
 </template>
 
@@ -71,4 +71,8 @@
 
 <template name="result">
   <h2 class="text-center">{{amount}}</h2>
+</template>
+
+<template name="entranceOption">
+  <option value={{year}}>{{year}}</option>
 </template>

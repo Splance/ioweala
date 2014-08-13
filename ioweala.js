@@ -1,5 +1,14 @@
 
 Entrances = new Meteor.Collection("entrances");
+if(Meteor.isServer) {
+    Meteor.publish("entrances", function() {
+        return Entrances.find({});
+    });
+}
+
+if(Meteor.isClient) {
+    Meteor.subscribe("entrances");
+}
 
 if (Meteor.isClient) {
 
@@ -12,15 +21,15 @@ if (Meteor.isClient) {
   Session.set('entranceYear', defaultYear);
 
   Template.hello.greeting = function () {
-    return "";
+    return "Bonjour";
   };
 
   Template.selectDateOfTwentyFifthBirthday.defaultDate = function() {
     return defaultDate;
   };
 
-  Template.selectDateOfTwentyFifthBirthday.years = function () {
-    return EntranceYears.find({}, {sort: {year: 1}}); //not working for some reason
+  Template.selectEntranceYear.entrances = function () {
+    return Entrances.find({}, {sort: {year: 1}}); //not working for some reason
   };
 
   Template.inputOriginalAward.defaultAmount = function() {
@@ -111,14 +120,13 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
-    // code to run on server at startup
-    if (Entrances.find().count() === 0) {
-      var classes = [{year:"2008", fdoc:"01/08/2008", rate:0.155},
+    // code to run on server at startup - clear and repopulate the db
+    Entrances.remove({});
+    var classes = [{year:"2008", fdoc:"01/08/2008", rate:0.155},
                    {year:"2009", fdoc:"01/08/2009", rate:0.17},
                    {year:"2010", fdoc:"01/08/2010", rate:0.16}
                    ];
-      for (var i = 0; i < classes.length; i++)
-        Entrances.insert(classes[i]);
-    }
+    for (var i = 0; i < classes.length; i++)
+      Entrances.insert(classes[i]);
   });
 }
